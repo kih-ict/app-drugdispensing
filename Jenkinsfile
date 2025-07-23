@@ -7,10 +7,11 @@ pipeline {
 
     environment {
         ANDROID_HOME = "/opt/android-sdk"
-        PATH = "${env.PATH}:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools"
+        GRADLE_USER_HOME = "${WORKSPACE}/.gradle"
         NPM_CONFIG_CACHE = "${WORKSPACE}/.npm"
-        GRADLE_USER_HOME = "${WORKSPACE}/.gradle" // simpan cache gradle di tempat yang writable
+        PATH = "/opt/gradle/bin:${env.PATH}:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools"
     }
+
 
     stages {
         stage('Checkout Code') {

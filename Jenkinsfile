@@ -30,6 +30,7 @@ pipeline {
             steps {
                 dir('android') {
                     sh '''
+                        which gradle && gradle --version
                         echo "ANDROID_HOME: $ANDROID_HOME"
                         echo "JAVA_HOME: $JAVA_HOME"
                         echo "Using GRADLE_USER_HOME: $GRADLE_USER_HOME"

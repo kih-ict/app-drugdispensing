@@ -30,6 +30,8 @@ pipeline {
             steps {
                 dir('android') {
                     sh '''
+                        export HOME=$WORKSPACE
+
                         echo "ANDROID_HOME: $ANDROID_HOME"
                         echo "JAVA_HOME: $JAVA_HOME"
                         java -version || true
@@ -39,9 +41,9 @@ pipeline {
                         chmod -R 777 $GRADLE_USER_HOME
 
                         # Fix: make ~/.android writable
-                        mkdir -p ~/.android
-                        touch ~/.android/analytics.settings
-                        chmod -R 777 ~/.android
+                        mkdir -p $HOME/.android
+                        touch $HOME/.android/analytics.settings
+                        chmod -R 777 $HOME/.android
 
                         chmod +x gradlew
                         ./gradlew --no-daemon clean assembleRelease
@@ -49,6 +51,7 @@ pipeline {
                 }
             }
         }
+
 
 
 

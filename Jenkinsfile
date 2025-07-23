@@ -45,12 +45,13 @@ pipeline {
                         touch $HOME/.android/analytics.settings
                         chmod -R 777 $HOME/.android
 
-                        chmod +x gradlew
-                        ./gradlew --no-daemon clean assembleRelease
+                        # GUNAKAN GRADLE GLOBAL dari Docker
+                        gradle --no-daemon clean assembleRelease
                     '''
                 }
             }
         }
+
 
 
 

@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'ictdevkih/app-android-build:latest'
+            image 'ictdevkih/app-android-build:v2'
         }
     }
 

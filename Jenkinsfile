@@ -52,6 +52,9 @@ pipeline {
                         echo "Removing any previous prefab build"
                         rm -rf ../node_modules/react-native-reanimated/android/build
 
+                        echo "Make gradlew executable"
+                        chmod +x ./gradlew
+                        
                         echo "Generating prefab for react-native-reanimated"
                         ./gradlew :react-native-reanimated:prefabReleasePackage
 

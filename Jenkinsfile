@@ -49,9 +49,6 @@ pipeline {
                         chmod -R 777 ../node_modules || true
                         find ../node_modules -type d -name build -exec chmod -R 777 {} +
 
-                        echo "Removing any previous prefab build"
-                        rm -rf ../node_modules/react-native-reanimated/android/build
-
                         echo "Make gradlew executable"
                         chmod +x ./gradlew
 

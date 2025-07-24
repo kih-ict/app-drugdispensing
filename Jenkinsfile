@@ -54,9 +54,9 @@ pipeline {
 
                         echo "Make gradlew executable"
                         chmod +x ./gradlew
-                        
+
                         echo "Generating prefab for react-native-reanimated"
-                        ./gradlew :react-native-reanimated:prefabReleasePackage
+                        gradle :react-native-reanimated:prefabReleasePackage
 
                         echo "Fixing permissions after prefab generation"
                         chmod -R 777 ../node_modules/react-native-reanimated/android/build

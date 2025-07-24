@@ -52,18 +52,18 @@ pipeline {
                         echo "Removing any previous prefab build"
                         rm -rf ../node_modules/react-native-reanimated/android/build
 
+                        echo "Generating prefab for react-native-reanimated"
+                        ./gradlew :react-native-reanimated:prefabReleasePackage
+
+                        echo "Fixing permissions after prefab generation"
+                        chmod -R 777 ../node_modules/react-native-reanimated/android/build
+
                         echo "Building APK..."
                         gradle --no-daemon clean assembleRelease
                     '''
                 }
             }
         }
-
-
-
-
-
-
         stage('Archive APK') {
             steps {
                 archiveArtifacts artifacts: 'android/app/build/outputs/apk/release/app-release.apk', fingerprint: true

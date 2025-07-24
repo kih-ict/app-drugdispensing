@@ -26,7 +26,7 @@ pipeline {
             }
         }
 
-        stage('Build APK') {
+       stage('Build APK') {
             steps {
                 dir('android') {
                     sh '''
@@ -40,17 +40,25 @@ pipeline {
                         mkdir -p $GRADLE_USER_HOME
                         chmod -R 777 $GRADLE_USER_HOME
 
-                        # Fix: make ~/.android writable
+                        echo "Preparing .android directory"
                         mkdir -p $HOME/.android
                         touch $HOME/.android/analytics.settings
                         chmod -R 777 $HOME/.android
 
-                        # GUNAKAN GRADLE GLOBAL dari Docker
+                        echo "Fixing permissions for node_modules"
+                        chmod -R 777 ../node_modules || true
+                        find ../node_modules -type d -name build -exec chmod -R 777 {} +
+
+                        echo "Removing any previous prefab build"
+                        rm -rf ../node_modules/react-native-reanimated/android/build
+
+                        echo "Building APK..."
                         gradle --no-daemon clean assembleRelease
                     '''
                 }
             }
         }
+
 
 
 
